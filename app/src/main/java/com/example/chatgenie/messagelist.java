@@ -18,6 +18,7 @@ import java.util.List;
 public class messagelist extends AppCompatActivity {
     private RecyclerView mMessageRecycler;
     private MessageListAdapter mMessageAdapter;
+
     private List<Chat> chatList = new ArrayList<Chat>();
     private Chat chat;
     ImageButton imageButton;
@@ -35,6 +36,7 @@ public class messagelist extends AppCompatActivity {
 
         mMessageRecycler = (RecyclerView) findViewById(R.id.reyclerview_message_list);
         mMessageAdapter = new MessageListAdapter(this, chatList);
+        mMessageRecycler.setAdapter(mMessageAdapter);
         mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
 
         imageButton = (ImageButton) findViewById(R.id.button_chatbox_send);
@@ -46,8 +48,10 @@ public class messagelist extends AppCompatActivity {
                 chat.setSender("user");
                 chatList.add(chat);
                 mMessageAdapter = new MessageListAdapter(getApplicationContext(), chatList);
+                mMessageRecycler.setAdapter(mMessageAdapter);
                 mMessageRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
+                EditText editText = (EditText) findViewById(R.id.edittext_chatbox);
+                editText.setText("");
 
             }
         });

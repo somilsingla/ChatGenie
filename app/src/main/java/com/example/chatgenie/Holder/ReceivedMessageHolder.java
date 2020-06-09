@@ -13,9 +13,9 @@ import java.util.List;
 
 public class ReceivedMessageHolder extends RecyclerView.ViewHolder {
 
-    TextView messagebot;
+    public TextView messagebot;
 
-    ReceivedMessageHolder(View itemview){
+     public ReceivedMessageHolder(View itemview){
         super(itemview);
         messagebot = (TextView) itemview.findViewById(R.id.bot_message_body);
 

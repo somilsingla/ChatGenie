@@ -11,13 +11,15 @@ import com.example.chatgenie.R;
 
 public class SentMessageHolder extends RecyclerView.ViewHolder {
 
-    TextView messageuser;
+    public TextView messageuser;
 
-    SentMessageHolder(View itemview){
+    public SentMessageHolder(View itemview){
         super(itemview);
         messageuser = (TextView) itemview.findViewById(R.id.user_message_body);
 
     }
+
+
 
     public void bind (Chat chat){
         messageuser.setText(chat.getMessage());

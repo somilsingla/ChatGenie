@@ -1,6 +1,5 @@
 package com.example.chatgenie.Holder;
 
-import android.provider.Telephony;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,9 +18,4 @@ public class SentMessageHolder extends RecyclerView.ViewHolder {
 
     }
 
-
-
-    public void bind (Chat chat){
-        messageuser.setText(chat.getMessage());
-    }
 }

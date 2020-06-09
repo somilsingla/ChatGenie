@@ -36,22 +36,25 @@ public class messagelist extends AppCompatActivity {
 
         mMessageRecycler = (RecyclerView) findViewById(R.id.reyclerview_message_list);
         mMessageAdapter = new MessageListAdapter(this, chatList);
-        mMessageRecycler.setAdapter(mMessageAdapter);
         mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mMessageRecycler.setAdapter(mMessageAdapter);
+
 
         imageButton = (ImageButton) findViewById(R.id.button_chatbox_send);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 usermessage();
-                chat.setMessage(message);
-                chat.setSender("user");
-                chatList.add(chat);
+                Chat temp1 = new Chat();
+                temp1.setMessage(message);
+                temp1.setSender("user");
+                chatList.add(temp1);
                 mMessageAdapter = new MessageListAdapter(getApplicationContext(), chatList);
-                mMessageRecycler.setAdapter(mMessageAdapter);
                 mMessageRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                mMessageRecycler.setAdapter(mMessageAdapter);
                 EditText editText = (EditText) findViewById(R.id.edittext_chatbox);
                 editText.setText("");
+
 
             }
         });

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,7 +38,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
     public int getItemViewType (int position) {
         Chat chat = (Chat) chatlist.get(position);
-        if (chat.getSender().equals("user")) {
+        if ((chat.getSender()).equals("user")) {
             return VIEW_TYPE_MESSAGE_SENT;
         }
         else {
@@ -50,13 +51,11 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
         if (viewtype == VIEW_TYPE_MESSAGE_SENT) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_sent,parent,false);
-            SentMessageHolder sentMessageHolder = new SentMessageHolder(view);
-            return sentMessageHolder;
+            return new SentMessageHolder(view);
         }
         else if (viewtype == VIEW_TYPE_MESSAGE_RECEIVED) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_received,parent,false);
-            ReceivedMessageHolder receivedMessageHolder = new ReceivedMessageHolder(view);
-            return receivedMessageHolder;
+            return new ReceivedMessageHolder(view);
         }
         return null;
     }
@@ -73,4 +72,29 @@ public class MessageListAdapter extends RecyclerView.Adapter {
                 ((ReceivedMessageHolder) holder).messagebot.setText(chat.getMessage());
         }
     }
+
+    public class SentMessageHolder extends RecyclerView.ViewHolder {
+
+        public TextView messageuser;
+
+        public SentMessageHolder(View itemview){
+            super(itemview);
+            messageuser = (TextView) itemview.findViewById(R.id.user_message_body);
+
+        }
+
+    }
+
+    public class ReceivedMessageHolder extends RecyclerView.ViewHolder {
+
+        public TextView messagebot;
+
+        public ReceivedMessageHolder(View itemview) {
+            super(itemview);
+            messagebot = (TextView) itemview.findViewById(R.id.bot_message_body);
+
+        }
+
+    }
+
 }

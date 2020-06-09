@@ -27,6 +27,7 @@ public class messagelist extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messagelist);
+        chat = new Chat();
 
         chat.setMessage("Hello! How may I help you?");
         chat.setSender("bot");

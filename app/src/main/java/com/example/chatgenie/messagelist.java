@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -12,8 +13,21 @@ import android.widget.ImageButton;
 import com.example.chatgenie.Adapters.MessageListAdapter;
 import com.example.chatgenie.Model.Chat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class messagelist extends AppCompatActivity {
     private RecyclerView mMessageRecycler;
@@ -23,6 +37,9 @@ public class messagelist extends AppCompatActivity {
     private Chat chat;
     ImageButton imageButton;
     String message;
+    String botemssage;
+    JSONObject query = new JSONObject();
+    JSONObject reply = new JSONObject();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +71,39 @@ public class messagelist extends AppCompatActivity {
                 mMessageRecycler.setAdapter(mMessageAdapter);
                 EditText editText = (EditText) findViewById(R.id.edittext_chatbox);
                 editText.setText("");
+                try {
+                    query.put("query",temp1.getMessage().toString());
+                } catch (JSONException e) {
+                    Log.d("OKHTTP3","JSON Exception");
+                    e.printStackTrace();
+                }
 
+                OkHttpClient okHttpClient = new OkHttpClient();
+                String url = "";
+
+                MediaType JSON = MediaType.parse("application/json");
+                RequestBody requestBody = RequestBody.create(JSON, query.toString() );
+                Request request = new Request.Builder()
+                                    .url(url)
+                                    .post(requestBody).build();
+                try {
+                    Response response = okHttpClient.newCall(request).execute();
+                    if(response.isSuccessful()) {
+                        reply = new JSONObject(response.toString());
+                        botemssage = reply.getString("response");
+                    }
+                } catch (IOException | JSONException e) {
+                    Log.d("OKHTTP","Exception while requesting");
+                    e.printStackTrace();
+                }
+
+                Chat temp2 = new Chat();
+                temp2.setMessage(botemssage);
+                temp2.setSender("bot");
+                chatList.add(temp2);
+                mMessageAdapter = new MessageListAdapter(getApplicationContext(), chatList);
+                mMessageRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                mMessageRecycler.setAdapter(mMessageAdapter);
 
             }
         });

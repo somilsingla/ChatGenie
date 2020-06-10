@@ -37,7 +37,7 @@ public class messagelist extends AppCompatActivity {
     private Chat chat;
     ImageButton imageButton;
     String message;
-    String botemssage;
+    String botmessage;
     JSONObject query = new JSONObject();
     JSONObject reply = new JSONObject();
 
@@ -90,7 +90,7 @@ public class messagelist extends AppCompatActivity {
                     Response response = okHttpClient.newCall(request).execute();
                     if(response.isSuccessful()) {
                         reply = new JSONObject(response.toString());
-                        botemssage = reply.getString("response");
+                        botmessage = reply.getString("response");
                     }
                 } catch (IOException | JSONException e) {
                     Log.d("OKHTTP","Exception while requesting");
@@ -98,7 +98,7 @@ public class messagelist extends AppCompatActivity {
                 }
 
                 Chat temp2 = new Chat();
-                temp2.setMessage(botemssage);
+                temp2.setMessage(botmessage);
                 temp2.setSender("bot");
                 chatList.add(temp2);
                 mMessageAdapter = new MessageListAdapter(getApplicationContext(), chatList);

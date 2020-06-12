@@ -72,30 +72,41 @@ public class messagelist extends AppCompatActivity {
                 EditText editText = (EditText) findViewById(R.id.edittext_chatbox);
                 editText.setText("");
                 try {
-                    query.put("query",temp1.getMessage().toString());
+                    query.put("message",temp1.getMessage().toString());
                 } catch (JSONException e) {
                     Log.d("OKHTTP3","JSON Exception");
                     e.printStackTrace();
                 }
 
                 OkHttpClient okHttpClient = new OkHttpClient();
-                String url = "";
+                String url = "http://dummy.restapiexample.com/api/v1/employee/1";
 
                 MediaType JSON = MediaType.parse("application/json");
                 RequestBody requestBody = RequestBody.create(JSON, query.toString() );
                 Request request = new Request.Builder()
                                     .url(url)
-                                    .post(requestBody).build();
-                try {
-                    Response response = okHttpClient.newCall(request).execute();
-                    if(response.isSuccessful()) {
-                        reply = new JSONObject(response.toString());
-                        botmessage = reply.getString("response");
+                                    .get().build();
+
+                okHttpClient.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        botmessage = "Failure";
                     }
-                } catch (IOException | JSONException e) {
-                    Log.d("OKHTTP","Exception while requesting");
-                    e.printStackTrace();
-                }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        try {
+                            if(response.isSuccessful())
+                            reply = new JSONObject(response.body().string());
+                            //botmessage = reply.getString("message");
+                            botmessage = reply.getString("status");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
 
                 Chat temp2 = new Chat();
                 temp2.setMessage(botmessage);

@@ -13,7 +13,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/userbubble"
-        android:maxWidth="280dp"
+        android:maxWidth="260dp"
         android:padding="8dp"
         android:text="hello, hello!"
         android:textColor="#ffffff"

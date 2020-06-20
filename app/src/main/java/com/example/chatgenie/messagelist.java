@@ -82,7 +82,7 @@ public class messagelist extends AppCompatActivity {
 
                 // Putting the user query as a JSON object
                 try {
-                    query.put("message", temp1.getMessage().toString());
+                    query.put("messages", temp1.getMessage().toString());
                 } catch (JSONException e) {
                     Log.d("OKHTTP3","JSON Exception");
                     e.printStackTrace();
@@ -91,7 +91,7 @@ public class messagelist extends AppCompatActivity {
                 // Setting up a HTTP Client to post request to backend
 
                 OkHttpClient okHttpClient = new OkHttpClient();
-                String url = "http://104.215.195.198/api/messages";
+                String url = "http://104.215.195.198/api/messages/";
 
                 // Posting request to the backend server
                 MediaType JSON = MediaType.parse("application/json");
@@ -99,7 +99,7 @@ public class messagelist extends AppCompatActivity {
                 Request request = new Request.Builder()
                                     .url(url)
                                     .addHeader("Content-Type","application/json")
-                                    .addHeader("Accept","/")
+                                    .addHeader("Accept","*/*")
                                     .addHeader("Host","104.215.195.198")
                                     .post(requestBody).build();
 
@@ -118,14 +118,13 @@ public class messagelist extends AppCompatActivity {
 
                                     // Receiving the response from the server and displaying
 
-                                    if(response.isSuccessful()) {
+                                    if (response.isSuccessful()) {
 
                                         assert response.body() != null;
                                         reply = new JSONObject(response.body().string());
                                         botmessage = reply.getString("message");
 
-                                    }
-                                    else {
+                                    } else {
                                         Log.d("Fail","Response not succesful");
                                         botmessage = "Response is not succesful";
                                     }

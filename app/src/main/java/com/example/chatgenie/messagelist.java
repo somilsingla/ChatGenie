@@ -79,6 +79,8 @@ public class messagelist extends AppCompatActivity {
                 mMessageRecycler.setAdapter(mMessageAdapter);
                 EditText editText = (EditText) findViewById(R.id.edittext_chatbox);
                 editText.setText("");
+                mMessageRecycler.scrollToPosition(chatList.size()-1);
+
 
                 // Putting the user query as a JSON object
                 try {
@@ -136,6 +138,7 @@ public class messagelist extends AppCompatActivity {
                                     mMessageAdapter = new MessageListAdapter(getApplicationContext(), chatList);
                                     mMessageRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                                     mMessageRecycler.setAdapter(mMessageAdapter);
+                                    mMessageRecycler.scrollToPosition(chatList.size()-1);
 
 
                                 }catch (JSONException | IOException e) {

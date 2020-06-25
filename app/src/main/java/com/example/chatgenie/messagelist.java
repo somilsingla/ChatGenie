@@ -54,7 +54,7 @@ public class messagelist extends AppCompatActivity {
 
         // Hard coded greeting by the chat-bot is displayed in the view
 
-        chat.setMessage("Hello! How may I help you?");
+        chat.setMessage("Hello! How may I help you? Type help for more information");
         chat.setSender("bot");
         chatList.add(chat);
 

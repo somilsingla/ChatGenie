@@ -16,6 +16,8 @@ import com.example.chatgenie.R;
 
 import java.util.List;
 
+// Adapter for the message list
+
 public class MessageListAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
@@ -30,12 +32,14 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     }
 
 
+    // Gets the no. of items in the arraylist
 
     @Override
     public int getItemCount() {
         return chatlist.size();
     }
 
+    // Returns the type of item i.e. sent or received
     public int getItemViewType (int position) {
         Chat chat = (Chat) chatlist.get(position);
         if ((chat.getSender()).equals("user")) {
@@ -46,6 +50,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         }
     }
 
+    // Inflates the view with the type of message
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewtype) {
         View view;
 
@@ -60,6 +65,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         return null;
     }
 
+    // Binds the view with the message
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Chat chat = (Chat) chatlist.get(position);

@@ -1,5 +1,7 @@
 package com.example.chatgenie.Model;
 
+// Model class for the chat item, which contains the message and the sender details
+
 public class Chat {
 
     private String message;

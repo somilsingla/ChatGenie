@@ -11,6 +11,8 @@ import com.example.chatgenie.R;
 
 import java.util.List;
 
+// Holder for the messages sent by the bot
+
 public class ReceivedMessageHolder extends RecyclerView.ViewHolder {
 
     public TextView messagebot;

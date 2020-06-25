@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.chatgenie.Model.Chat;
 import com.example.chatgenie.R;
 
+// Holder for the messages sent by the user
+
 public class SentMessageHolder extends RecyclerView.ViewHolder {
 
     public TextView messageuser;

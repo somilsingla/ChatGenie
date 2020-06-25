@@ -11,8 +11,8 @@
         android:id="@+id/botButton"
         android:layout_width="157dp"
         android:layout_height="156dp"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="144dp"
         android:background="@drawable/bot"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,9 +22,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
-        android:layout_marginBottom="372dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="275dp"
         android:text="Press the bot button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botButton"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
